@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent - Premium Language Learning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-green: #1a4d2e;
+            --medium-green: #2a6b3d;
+            --light-green: #4a9c5a;
+            --gold: #d4af37;
+            --light-gold: #f1e5ac;
+            --dark: #121f17;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+        
+        .bg-dark-green {
+            background-color: var(--dark-green);
+        }
+        
+        .bg-medium-green {
+            background-color: var(--medium-green);
+        }
+        
+        .text-gold {
+            color: var(--gold);
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--dark-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background-color: #c9a227;
+            color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-outline-gold {
+            border-color: var(--gold);
+            color: var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-gold:hover {
+            background-color: var(--gold);
+            color: var(--dark-green);
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            background-color: var(--dark-green) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 8px 0;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--medium-green) 100%);
+            color: white;
+            padding: 7rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .language-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-card .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 77, 46, 0.9), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .language-card:hover .card-overlay {
+            transform: translateY(0);
+        }
+        
+        .tutor-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tutor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tutor-card .tutor-img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .tutor-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--gold);
+            color: var(--dark-green);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: rotate(10deg) scale(1.1);
+            background-color: rgba(212, 175, 55, 0.2);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .how-it-works-step {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 2rem;
+        }
+        
+        .how-it-works-step .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background-color: var(--gold);
+            color: var(--dark-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .video-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: rgba(212, 175, 55, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .video-container .play-btn:hover {
+            background-color: var(--gold);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .pricing-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .pricing-card .pricing-header {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--gold);
+        }
+        
+        .pricing-card.featured .pricing-header {
+            background-color: var(--gold);
+            color: var(--dark-green);
+        }
+        
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+        }
+        
+        footer .footer-links h5 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            
+        }
+        .list-unstyled a{
+            text-decoration: none;
+            color: #f8f9fa;
+        }
+        
+        footer .footer-links h5::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--gold);
+            color: var(--dark-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-green fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">
+                <i class="fas fa-language me-2 text-gold"></i>Fluent
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#languages">Languages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tutors">Tutors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="login.html" class="btn btn-outline-light me-2" target="_blank">Log In</a>
+                    <a href="#" class="btn btn-gold">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="fw-bold mb-4 display-4">Become fluent in your dream language</h1>
+                    <p class="lead mb-4">1-on-1 online lessons with certified tutors tailored to your goals and schedule.</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#tutors" class="btn btn-gold btn-lg px-4">Find Your Tutor</a>
+                        <a href="#how-it-works" class="btn btn-outline-light btn-lg px-4">How It Works</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle border border-3 border-white" width="40" height="40">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="rounded-circle border border-3 border-white ms-n2" width="40" height="40">
+                            <img src="https://randomuser.me/api/portraits/women/63.jpg" class="rounded-circle border border-3 border-white ms-n2" width="40" height="40">
+                        </div>
+                        <div class="ms-3">
+                            <div class="text-white-50 small">Join our community of</div>
+                            <div class="text-white fw-bold">10,000+ happy learners</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left">
+                    <div class="video-container position-relative">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                             alt="Language learning" 
+                             class="img-fluid">
+                        <a href="#" class="play-btn" data-bs-toggle="modal" data-bs-target="#videoModal">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section class="py-5" id="languages">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Learn Any Language</h2>
+                <p class="text-muted">Choose from over 20 languages taught by native speakers</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="language-card bg-white h-100">
+                        <img src="https://flagcdn.com/w320/es.png" class="img-fluid w-100">
+                        <div class="p-4">
+                            <h4>Spanish</h4>
+                            <p class="text-muted">500+ tutors available</p>
+                        </div>
+                        <div class="card-overlay">
+                            
+                            <a href="tutor.html" class="btn btn-sm btn-gold w-100">Browse Tutors</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="language-card bg-white h-100">
+                        <img src="https://flagcdn.com/w320/fr.png" class="img-fluid w-100">
+                        <div class="p-4">
+                            <h4>French</h4>
+                            <p class="text-muted">420+ tutors available</p>
+                        </div>
+                        <div class="card-overlay">
+                            <a href="tutor.html" class="btn btn-sm btn-gold w-100">Browse Tutors</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="language-card bg-white h-100">
+                        <img src="https://flagcdn.com/w320/de.png" class="img-fluid w-100">
+                        <div class="p-4">
+                            <h4>German</h4>
+                            <p class="text-muted">380+ tutors available</p>
+                        </div>
+                        <div class="card-overlay">
+                            <a href="tutor.html" class="btn btn-sm btn-gold w-100">Browse Tutors</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="language-card bg-white h-100">
+                        <img src="https://flagcdn.com/w320/jp.png" class="img-fluid w-100">
+                        <div class="p-4">
+                            <h4>Japanese</h4>
+                            <p class="text-muted">250+ tutors available</p>
+                        </div>
+                        <div class="card-overlay">
+                            <a href="tutor.html" class="btn btn-sm btn-gold w-100">Browse Tutors</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#" class="btn btn-outline-dark">View All Languages</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tutors Section -->
+    <section class="py-5 bg-light" id="tutors">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Featured Tutors</h2>
+                <p class="text-muted">Meet some of our top-rated language instructors</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tutor-card bg-white h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="tutor-img">
+                            <span class="badge">Online</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>Maria Rodriguez</h4>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="text-gold">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-1 text-dark">4.8</span>
+                                </div>
+                                <span class="ms-2 text-muted">(120 reviews)</span>
+                            </div>
+                            <p class="text-muted mb-3">
+                                <i class="fas fa-language me-1 text-gold"></i> Spanish Tutor
+                                <br>
+                                <i class="fas fa-map-marker-alt me-1 text-gold"></i> Madrid, Spain
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark">$25/hr</span>
+                                <a href="tutor.html" class="btn btn-sm btn-gold">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tutor-card bg-white h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="tutor-img">
+                            <span class="badge">Online</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>Jean-Luc Martin</h4>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="text-gold">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-1 text-dark">5.0</span>
+                                </div>
+                                <span class="ms-2 text-muted">(95 reviews)</span>
+                            </div>
+                            <p class="text-muted mb-3">
+                                <i class="fas fa-language me-1 text-gold"></i> French Tutor
+                                <br>
+                                <i class="fas fa-map-marker-alt me-1 text-gold"></i> Paris, France
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark">$32/hr</span>
+                                <a href="#" class="btn btn-sm btn-gold">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tutor-card bg-white h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="tutor-img">
+                            <span class="badge">Online</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>Sophie Müller</h4>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="text-gold">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-1 text-dark">5.0</span>
+                                </div>
+                                <span class="ms-2 text-muted">(210 reviews)</span>
+                            </div>
+                            <p class="text-muted mb-3">
+                                <i class="fas fa-language me-1 text-gold"></i> German Tutor
+                                <br>
+                                <i class="fas fa-map-marker-alt me-1 text-gold"></i> Berlin, Germany
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark">$28/hr</span>
+                                <a href="#" class="btn btn-sm btn-gold">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="tutor-card bg-white h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="tutor-img">
+                            <span class="badge">Online</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>Hiroshi Tanaka</h4>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="text-gold">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-1 text-dark">4.7</span>
+                                </div>
+                                <span class="ms-2 text-muted">(75 reviews)</span>
+                            </div>
+                            <p class="text-muted mb-3">
+                                <i class="fas fa-language me-1 text-gold"></i> Japanese Tutor
+                                <br>
+                                <i class="fas fa-map-marker-alt me-1 text-gold"></i> Tokyo, Japan
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark">$35/hr</span>
+                                <a href="#" class="btn btn-sm btn-gold">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#" class="btn btn-gold">Browse All Tutors</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-5" id="how-it-works">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">How Fluent Works</h2>
+                <p class="text-muted">Start speaking a new language in just 3 easy steps</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="how-it-works-step" data-aos="fade-up" data-aos-delay="100">
+                        <div class="step-number">1</div>
+                        <h3>Find Your Perfect Tutor</h3>
+                        <p class="text-muted">Browse profiles, watch introduction videos, and read reviews to find the ideal tutor for your learning style and goals. Filter by availability, price, and teaching approach.</p>
+                    </div>
+                    
+                    <div class="how-it-works-step" data-aos="fade-up" data-aos-delay="200">
+                        <div class="step-number">2</div>
+                        <h3>Book Your First Lesson</h3>
+                        <p class="text-muted">Schedule lessons at times that work for you. Our platform makes it easy to see tutor availability and book sessions instantly. Choose between 30, 45, or 60 minute lessons.</p>
+                    </div>
+                    
+                    <div class="how-it-works-step" data-aos="fade-up" data-aos-delay="300">
+                        <div class="step-number">3</div>
+                        <h3>Start Learning Online</h3>
+                        <p class="text-muted">Connect with your tutor through our virtual classroom featuring video chat, interactive whiteboard, and file sharing. All you need is a computer or smartphone with internet access.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-5 bg-light" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Simple, Transparent Pricing</h2>
+                <p class="text-muted">Choose the plan that works best for you</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-card bg-white h-100">
+                        <div class="pricing-header">
+                            <h4 class="fw-bold">Basic</h4>
+                            <div class="display-4 fw-bold my-3">$15</div>
+                            <p class="mb-0">per hour</p>
+                        </div>
+                        <div class="p-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 1 lesson per week</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Standard tutors</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Email support</li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> Progress reports</li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> Learning materials</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-dark w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card bg-white h-100 featured">
+                        <div class="pricing-header">
+                            <h4 class="fw-bold">Premium</h4>
+                            <div class="display-4 fw-bold my-3">$25</div>
+                            <p class="mb-0">per hour</p>
+                        </div>
+                        <div class="p-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 2-3 lessons per week</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Certified tutors</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Priority support</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Progress reports</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Learning materials</li>
+                            </ul>
+                            <a href="#" class="btn btn-gold w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-card bg-white h-100">
+                        <div class="pricing-header">
+                            <h4 class="fw-bold">Immersion</h4>
+                            <div class="display-4 fw-bold my-3">$40</div>
+                            <p class="mb-0">per hour</p>
+                        </div>
+                        <div class="p-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 4+ lessons per week</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Expert native tutors</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 24/7 support</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Detailed progress tracking</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Premium learning materials</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-dark w-100 mt-3">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5" id="testimonials">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Success Stories</h2>
+                <p class="text-muted">What our students say about learning with Fluent</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Sarah Johnson</h5>
+                                <div class="text-gold small">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">"After just 3 months of weekly lessons, I was able to have full conversations in Spanish during my trip to Barcelona. My tutor Maria tailored every lesson to my travel needs!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Michael Chen</h5>
+                                <div class="text-gold small">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Jean-Luc's business French lessons helped me secure a promotion at my multinational company. The industry-specific vocabulary and cultural tips were invaluable."</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Priya Patel</h5>
+                                <div class="text-gold small">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">"I passed the JLPT N4 exam thanks to Hiroshi-sensei's structured approach. The mock tests and personalized feedback made all the difference in my preparation."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-dark-green text-white">
+        <div class="container text-center" data-aos="zoom-in">
+            <h2 class="fw-bold mb-4">Ready to start your language journey?</h2>
+            <p class="lead mb-4">Join thousands of learners achieving their language goals with Fluent</p>
+            <a href="#" class="btn btn-gold btn-lg me-3">Find Your Tutor</a>
+            <a href="#" class="btn btn-outline-light btn-lg">Take a Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="fw-bold mb-3">
+                        <i class="fas fa-language me-2 text-gold"></i>Fluent
+                    </h3>
+                    <p>The most effective way to learn a language online with personalized 1-on-1 tutoring.</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4 footer-links">
+                    <h5 class="fw-bold">Learn</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Spanish</a></li>
+                        <li class="mb-2"><a href="#">French</a></li>
+                        <li class="mb-2"><a href="#">German</a></li>
+                        <li class="mb-2"><a href="#">Japanese</a></li>
+                        <li class="mb-2"><a href="#">All Languages</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4 footer-links">
+                    <h5 class="fw-bold">Teach</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Become a Tutor</a></li>
+                        <li class="mb-2"><a href="#">Teaching Resources</a></li>
+                        <li class="mb-2"><a href="#">Tutor Dashboard</a></li>
+                        <li class="mb-2"><a href="#">Tutor Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4 footer-links">
+                    <h5 class="fw-bold">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                        <li class="mb-2"><a href="#">Careers</a></li>
+                        <li class="mb-2"><a href="#">Press</a></li>
+                        <li class="mb-2"><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4 footer-links">
+                    <h5 class="fw-bold">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Terms</a></li>
+                        <li class="mb-2"><a href="#">Privacy</a></li>
+                        <li class="mb-2"><a href="#">Cookies</a></li>
+                        <li class="mb-2"><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom pt-4 mt-4 text-center text-md-start">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">© 2023 Fluent, Inc. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> for language learners</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/7eXg8Z4mXyo" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Back to top button
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
